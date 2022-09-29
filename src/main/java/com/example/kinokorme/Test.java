@@ -10,6 +10,6 @@ public class Test {
 
     @GetMapping
     public String sayHello() {
-        return "Hello World!";
+        return "Welcome to KinoKorme! Made by Tore && Serik";
     }
 }
