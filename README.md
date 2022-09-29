@@ -1,0 +1,2 @@
+# kinokorme
+Streaming platform
