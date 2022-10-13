@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<p th:text="'Hello, ' + ${title} + '!'" />
+
+<h1>Add New Movie</h1>
+<form th:action="@{/createMovie}" th:object="${sampleInputs}" method="post">
+
+    <div>
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" placeholder="yyyy-MM-dd" />
+    </div>
+    <div>
+        <label>Year:</label>
+        <input type="datetime-local" th:field="*{year}" placeholder="date" />
+    </div>
+
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

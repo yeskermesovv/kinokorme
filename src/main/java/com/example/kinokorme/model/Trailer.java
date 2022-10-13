@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-@Entity
-@Table(name = "TRAILER")
+//@Entity
+//@Table(name = "TRAILER")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -6,8 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "MOVIE")
+//@Entity
+//@Table(name = "MOVIE")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
