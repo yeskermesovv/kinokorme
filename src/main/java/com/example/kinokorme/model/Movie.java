@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "MOVIE")
@@ -67,6 +68,8 @@ public class Movie {
     @Column(name = "TAGS")
     private String tags;
 
+    @OneToMany(mappedBy="movie")
+    private List<Trailer> trailers;
 
 
 }

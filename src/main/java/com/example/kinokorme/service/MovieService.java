@@ -1,6 +1,7 @@
 package com.example.kinokorme.service;
 
 import com.example.kinokorme.model.Movie;
+import com.example.kinokorme.model.Trailer;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface MovieService {
     List<Movie> getMovieByTitle(String title);
 
     Movie createMovie(Movie movie);
+
+    List<Movie> getAll();
 }

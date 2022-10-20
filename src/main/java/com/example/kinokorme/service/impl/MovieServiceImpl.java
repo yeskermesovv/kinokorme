@@ -1,6 +1,7 @@
 package com.example.kinokorme.service.impl;
 
 import com.example.kinokorme.model.Movie;
+import com.example.kinokorme.model.Trailer;
 import com.example.kinokorme.repository.MovieRepository;
 import com.example.kinokorme.service.MovieService;
 import org.slf4j.Logger;
@@ -129,5 +130,10 @@ public class MovieServiceImpl implements MovieService {
     public Movie createMovie(Movie movie) {
         LOG.info("CRUD operation: CREATE movies");
         return movieRepository.saveAndFlush(movie);
+    }
+
+    @Override
+    public List<Movie> getAll() {
+        return movieRepository.findAll();
     }
 }

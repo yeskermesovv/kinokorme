@@ -1,6 +1,7 @@
 package com.example.kinokorme.controller;
 
 import com.example.kinokorme.model.Movie;
+import com.example.kinokorme.model.Trailer;
 import com.example.kinokorme.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,15 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/movies")
 public class MovieController {
 
     @Autowired
     private MovieService movieService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getMovieById(@PathVariable Long id){
-        return ResponseEntity.ok(movieService.getMovieById(id));
+    public String getMovieById(@PathVariable Long id, Model model){
+        Movie movie = movieService.getMovieById(id);
+        List<Trailer> trailers = movie.getTrailers();
+        model.addAttribute("movie", movie);
+        model.addAttribute("trailers", trailers);
+        return "movies/moviedetails";
     }
 
     @GetMapping("/page/{page}/{size}")
@@ -24,9 +32,31 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovie(page , size));
     }
 
+    @GetMapping
+    public String getMovies(Model model){
+        List<Movie> movies = movieService.getAll();
+        model.addAttribute("movies", movies);
+        return "movies/index";
+    }
+
+    @GetMapping("/new")
+    public String showCreateForm(Model model){
+        Movie movie = new Movie();
+        model.addAttribute("movie", movie);
+        return "movies/moviecreateform";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showUpdateForm(@PathVariable(value = "id") long id, Model model){
+        Movie movie = movieService.getMovieById(id);
+        model.addAttribute("movie", movie);
+        return "movies/movieupdateform";
+    }
+
     @PostMapping
-    public ResponseEntity<?> createMovie(@RequestBody Movie movie) {
-        return ResponseEntity.ok(movieService.createMovie(movie));
+    public String createMovie(@ModelAttribute("movie") Movie movie) {
+        movieService.createMovie(movie);
+        return "redirect:/movies";
     }
 
     @PutMapping
@@ -35,9 +65,9 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMovieById(@PathVariable Long id) {
+    public String deleteMovieById(@PathVariable Long id) {
         movieService.deleteMovie(id);
-        return ResponseEntity.ok(true);
+        return "redirect:/movies";
     }
 
     @GetMapping("/title/{title}")
@@ -46,9 +76,9 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovieByTitle(title));
     }
 
-    @GetMapping("greeting")
+    @GetMapping("/greeting")
     public String getMovies(@RequestParam(defaultValue = "Jake") String name, Model model) {
         model.addAttribute("name", name);
-        return "/greeting";
+        return "greeting";
     }
 }
