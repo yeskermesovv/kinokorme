@@ -1,6 +1,7 @@
 package com.example.kinokorme.model;
 
 import com.example.kinokorme.constants.Genre;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -68,6 +69,7 @@ public class Movie {
     @Column(name = "TAGS")
     private String tags;
 
+    @JsonManagedReference
     @OneToMany(mappedBy="movie")
     private List<Trailer> trailers;
 

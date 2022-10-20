@@ -27,7 +27,6 @@
         <tbody>
         <tr scope="row" th:each="movie:${movies}"
             th:onclick="'javascript:rowClicked(\'' + ${movie.id} + '\');'">
-        >
             <td th:text="${movie.title}"></td>
             <td th:text="${movie.description}"></td>
             <td style="border:none; display: flex; gap: 10px"><a th:href="@{/movies/{id}/edit(id=${movie.id})}"

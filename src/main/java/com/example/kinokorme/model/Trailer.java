@@ -1,5 +1,6 @@
 package com.example.kinokorme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Trailer {
     @Column(name = "UPLOAD_DATE")
     private Date uploadDate;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "MOVIE" , referencedColumnName = "ID")
     private Movie movie;
