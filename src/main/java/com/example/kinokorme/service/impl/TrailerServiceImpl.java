@@ -1,5 +1,6 @@
 package com.example.kinokorme.service.impl;
 
+import com.example.kinokorme.model.Movie;
 import com.example.kinokorme.model.Trailer;
 import com.example.kinokorme.repository.TrailerRepository;
 import com.example.kinokorme.service.TrailerService;
@@ -56,6 +57,12 @@ public class TrailerServiceImpl implements TrailerService {
 
         LOG.info("CRUD operation: DELETE trailer");
         trailerRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteTrailerByMovie(Movie movie) {
+        System.out.println("movie = " + movie.getTrailers());
+        movie.getTrailers().clear();
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public Movie updateMovie(Movie movie) {
@@ -103,7 +106,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void deleteMovie(Long id) {
-        LOG.info("CRUD operation: DELETE movies");
+        kafkaTemplate.send("kinokorme", String.valueOf(id));
         movieRepository.deleteById(id);
     }
 
